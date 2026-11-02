@@ -17,6 +17,7 @@ The EV Market Intelligence Dashboard is an industrial-grade business intelligenc
 🎥 Project Demonstration / Story: https://drive.google.com/file/d/1AHiIUhFumt1dCdY7w47JPJv5bXdDSeVH/view?usp=sharing
 
 💻 Project link: https://public.tableau.com/views/EV_Market_Intelligence_Dashboard_Uday_Chaurasia/Dashboard1?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link
+💻 Project link 2: https://public.tableau.com/views/EV_Market_Intelligence_Dashboard_Uday_Chaurasia/Story1?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link
 
 🛠️ Tech Stack & Architecture
 
