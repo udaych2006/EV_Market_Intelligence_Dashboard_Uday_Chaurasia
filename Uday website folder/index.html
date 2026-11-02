@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EV Insights | EV Market Dashboard &amp; Story</title>
+<meta name="description" content="Tracking adoption, momentum, and market transformation in the electric vehicle market.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Raleway:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#050505; --bg2:#141414; --card:#1a1a1a; --line:#2a2a2a;
+  --text:#f4f4f4; --muted:#a9a9a9; --amber:#f0a500; --amber-d:#c98a00;
+  --head:'Raleway',system-ui,sans-serif; --body:'Inter',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{background:var(--bg);color:var(--text);font-family:var(--body);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+section{padding:96px 0}
+h1,h2,h3{font-family:var(--head);line-height:1.15}
+
+/* nav */
+header{position:sticky;top:0;z-index:50;background:rgba(5,5,5,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:68px;gap:20px}
+.logo{font-family:var(--head);font-weight:800;font-size:1.3rem}
+.links{display:flex;gap:26px;font-size:.88rem;font-weight:500}
+.links a{color:var(--text);padding:4px 0;border-bottom:2px solid transparent;transition:color .2s,border-color .2s}
+.links a:hover,.links a.active{color:var(--amber);border-color:var(--amber)}
+.cta{display:flex;gap:10px}
+.btn{display:inline-block;font-family:var(--body);font-weight:600;font-size:.85rem;padding:10px 20px;border-radius:999px;border:1.5px solid var(--amber);background:var(--amber);color:#111;cursor:pointer;transition:background .2s,color .2s}
+.btn:hover{background:var(--amber-d);border-color:var(--amber-d)}
+.btn.ghost{background:transparent;color:var(--text);border-color:#555}
+.btn.ghost:hover{border-color:var(--amber);color:var(--amber)}
+.menu{display:none;background:none;border:0;color:var(--text);font-size:1.6rem;cursor:pointer}
+
+/* hero */
+.hero{padding:130px 0 110px;text-align:center;background:radial-gradient(ellipse 70% 55% at 50% 0%,#2b1d00 0%,var(--bg) 70%)}
+.hero h1{font-size:clamp(2.4rem,6.5vw,4.6rem);font-weight:800;max-width:900px;margin:0 auto 22px}
+.typed{color:var(--amber);display:block;min-height:1.15em}
+.typed::after{content:"";display:inline-block;width:3px;height:.9em;background:var(--amber);margin-left:4px;vertical-align:-.08em;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.hero p{max-width:560px;margin:0 auto 34px;color:var(--muted);font-size:1.05rem}
+.hero .cta{justify-content:center}
+
+/* about */
+.about .grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.car{border-radius:18px;background:linear-gradient(160deg,#1d1d1d,#0b0b0b);border:1px solid var(--line);padding:28px}
+.car svg{width:100%;height:auto;display:block}
+.about h2{font-size:clamp(1.8rem,3.6vw,2.5rem);margin-bottom:10px}
+.about h2+i{display:block;width:70px;height:3px;background:var(--amber);margin-bottom:18px}
+.sub{color:#cfe0ff;font-size:1.05rem;margin-bottom:16px}
+.about p.lead{color:var(--muted);margin-bottom:28px}
+.mini{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.mini div{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px}
+.mini h3{font-size:.98rem;margin:8px 0 4px}
+.mini p{font-size:.82rem;color:var(--muted)}
+.ico{color:var(--amber);font-size:1.2rem}
+
+/* features + services */
+.alt{background:var(--bg2)}
+.head{max-width:620px;margin-bottom:44px}
+.head h2{font-size:clamp(1.8rem,3.6vw,2.5rem);margin-bottom:12px}
+.head p{color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:26px}
+.card h3{font-size:1.1rem;margin:10px 0 8px}
+.card p{color:var(--muted);font-size:.92rem}
+.card .ico{font-size:1.5rem}
+
+/* embeds */
+.frame{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;min-height:520px;display:flex}
+.frame iframe{width:100%;height:760px;border:0;background:#fff}
+.empty{margin:auto;padding:40px;text-align:center;max-width:460px;color:var(--muted)}
+.empty strong{display:block;color:var(--text);font-family:var(--head);font-size:1.15rem;margin-bottom:8px}
+.empty code{color:var(--amber);font-size:.85rem}
+
+footer{border-top:1px solid var(--line);padding:34px 0;color:var(--muted);font-size:.85rem}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.up{position:fixed;right:22px;bottom:22px;width:44px;height:44px;border-radius:50%;border:0;background:var(--amber);color:#111;font-size:1.2rem;font-weight:700;cursor:pointer;display:none}
+.up.show{display:block}
+
+@media(max-width:860px){
+  .links,.nav>.cta{display:none}
+  .menu{display:block}
+  header.open .links{display:flex;flex-direction:column;position:absolute;top:68px;left:0;right:0;background:var(--bg);padding:18px 24px 24px;border-bottom:1px solid var(--line);gap:16px}
+  .about .grid{grid-template-columns:1fr;gap:34px}
+  section{padding:70px 0}
+  .frame iframe{height:560px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.typed::after{animation:none}}
+</style>
+</head>
+<body>
+
+<header id="top">
+  <div class="wrap nav">
+    <a class="logo" href="#home">EV Insights</a>
+    <nav class="links" aria-label="Main">
+      <a href="#home" class="active">Home</a>
+      <a href="#about">About</a>
+      <a href="#features">Features</a>
+      <a href="#services">Services</a>
+      <a href="#dashboard">Dashboard</a>
+      <a href="#story">Story</a>
+    </nav>
+    <div class="cta">
+      <a class="btn" href="#dashboard">Explore Dashboard</a>
+      <a class="btn" href="#story">Explore Story</a>
+    </div>
+    <button class="menu" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="home">
+  <div class="wrap">
+    <h1>Transform Your Workflow With <span class="typed" id="typed" aria-live="off">Seamless</span></h1>
+    <p>Explore live EV market intelligence, adoption trends, and the story behind the growth of electric mobility through a polished dashboard and narrative experience.</p>
+    <div class="cta">
+      <a class="btn" href="#dashboard">Explore the Dashboard</a>
+      <a class="btn ghost" href="#story">Explore Story</a>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="wrap grid">
+    <div class="car" aria-hidden="true">
+      <svg viewBox="0 0 520 260" fill="none" stroke="#f0a500" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M30 170 L52 120 Q60 104 80 100 L170 92 L215 52 Q224 44 240 44 L350 44 Q366 44 378 56 L420 98 L470 108 Q492 112 494 134 L496 170"/>
+        <path d="M170 92 L222 92 L238 56 M262 92 L262 56 M262 92 L405 98 L368 56"/>
+        <path d="M30 170 H92 M168 170 H356 M432 170 H496"/>
+        <circle cx="130" cy="172" r="38"/><circle cx="130" cy="172" r="16"/>
+        <circle cx="394" cy="172" r="38"/><circle cx="394" cy="172" r="16"/>
+        <path d="M268 140 H318" stroke-width="2"/>
+        <path d="M60 232 H460" stroke="#2a2a2a"/>
+      </svg>
+    </div>
+    <div>
+      <h2>Insights Behind the EV Story</h2><i></i>
+      <p class="sub">Tracking adoption, momentum, and market transformation</p>
+      <p class="lead">The EV market is moving fast, and the data reveals a clear story: demand is rising, technology is improving, and consumer confidence is accelerating. This dashboard highlights the key trends shaping the future of electric mobility and helps turn raw numbers into practical insight.</p>
+      <div class="mini">
+        <div><span class="ico">&#8599;</span><h3>Market Growth</h3><p>EV adoption continues to rise as awareness, infrastructure, and affordability improve across markets.</p></div>
+        <div><span class="ico">&#9889;</span><h3>Technology Shift</h3><p>Battery innovation and smarter mobility solutions are making EVs more competitive and scalable.</p></div>
+        <div><span class="ico">&#9733;</span><h3>Consumer Confidence</h3><p>Growing trust in EV performance and ownership value is changing how buyers decide.</p></div>
+        <div><span class="ico">&#9638;</span><h3>Actionable Insights</h3><p>Each visual in the dashboard points to a decision a manufacturer, analyst, or buyer can act on.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="features">
+  <div class="wrap">
+    <div class="head"><h2>What you can explore</h2><p>Nine visuals across three scenarios, built from a dataset of 100,000 vehicle records.</p></div>
+    <div class="cards">
+      <article class="card"><span class="ico">&#9638;</span><h3>Market performance</h3><p>Compare sales by manufacturer and region, price against customer rating, and which vehicle categories sell most.</p></article>
+      <article class="card"><span class="ico">&#9881;</span><h3>Technical benchmarks</h3><p>See how battery capacity affects range, how charging power affects fast-charge time, and how drivetrains compare on motor power.</p></article>
+      <article class="card"><span class="ico">&#9830;</span><h3>Cost and value</h3><p>Weigh resale value against insurance cost, safety ratings against autonomous level, and CO&#8322; savings against efficiency.</p></article>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="wrap">
+    <div class="head"><h2>Services</h2><p>How the data gets from a raw file to a decision.</p></div>
+    <div class="cards">
+      <article class="card"><span class="ico">&#9776;</span><h3>Data preparation</h3><p>Clean, standardise, and structure large vehicle datasets so every chart starts from trusted numbers.</p></article>
+      <article class="card"><span class="ico">&#9636;</span><h3>Interactive dashboards</h3><p>Filter by region, category, and battery type, and watch every visual update together.</p></article>
+      <article class="card"><span class="ico">&#9998;</span><h3>Data storytelling</h3><p>A guided, scene-by-scene story that explains what the numbers mean and what to do next.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="dashboard">
+  <div class="wrap">
+    <div class="head"><h2>Dashboard</h2><p>Filter and hover to explore the EV market across regions, categories, and technologies.</p></div>
+    <div class="frame" id="dash-frame"></div>
+  </div>
+</section>
+
+<section id="story">
+  <div class="wrap">
+    <div class="head"><h2>Story</h2><p>Step through the story scene by scene using the arrows inside the viewer.</p></div>
+    <div class="frame" id="story-frame"></div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>&copy; 2026 EV Insights. All rights reserved.</span>
+    <a href="#top">Back to top</a>
+  </div>
+</footer>
+
+<button class="up" id="up" aria-label="Back to top">&uarr;</button>
+
+<script>
+/* ====== EDIT THESE TWO LINES ======
+   Paste the Tableau Public view URL (the address of the dashboard/story page,
+   e.g. https://public.tableau.com/views/EVMarket/Dashboard1). */
+const TABLEAU_DASHBOARD_URL = "https://public.tableau.com/views/EV_Market_Intelligence_Dashboard_Uday_Chaurasia/Dashboard1?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link";
+const TABLEAU_STORY_URL = "https://public.tableau.com/views/EV_Market_Intelligence_Dashboard_Uday_Chaurasia/Story1?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link";
+
+function embed(id, url, label){
+  const box = document.getElementById(id);
+  if(!url){
+    box.innerHTML = '<div class="empty"><strong>' + label + ' not connected yet</strong>Open <code>index.html</code>, find <code>TABLEAU_' + (id==='dash-frame'?'DASHBOARD':'STORY') + '_URL</code>, and paste your Tableau Public link.</div>';
+    return;
+  }
+  const clean = url.split('?')[0];
+  const f = document.createElement('iframe');
+  f.src = clean + '?:showVizHome=no&:embed=true&:toolbar=yes';
+  f.title = label;
+  f.loading = 'lazy';
+  f.allowFullscreen = true;
+  box.appendChild(f);
+}
+embed('dash-frame', TABLEAU_DASHBOARD_URL, 'Dashboard');
+embed('story-frame', TABLEAU_STORY_URL, 'Story');
+
+/* typing headline */
+(function(){
+  const el = document.getElementById('typed');
+  const words = ['Seamless','Data','Insight','Clarity'];
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches){return;}
+  let w = 0, c = words[0].length, del = true;
+  (function tick(){
+    const word = words[w];
+    el.textContent = word.slice(0,c);
+    if(del){ c--; if(c < 0){ del = false; w = (w+1) % words.length; c = 0; } }
+    else { c++; if(c > words[w].length){ del = true; c = words[w].length; return setTimeout(tick,1800); } }
+    setTimeout(tick, del ? 55 : 95);
+  })();
+  setTimeout(()=>{}, 0);
+})();
+
+/* nav: mobile menu, active link, back-to-top */
+const header = document.querySelector('header');
+const btn = document.querySelector('.menu');
+btn.addEventListener('click',()=>{const o = header.classList.toggle('open'); btn.setAttribute('aria-expanded',o);});
+document.querySelectorAll('.links a').forEach(a=>a.addEventListener('click',()=>{header.classList.remove('open');btn.setAttribute('aria-expanded',false);}));
+
+const links = [...document.querySelectorAll('.links a')];
+const io = new IntersectionObserver(es=>{
+  es.forEach(e=>{ if(e.isIntersecting){ links.forEach(l=>l.classList.toggle('active', l.getAttribute('href')==='#'+e.target.id)); } });
+},{rootMargin:'-45% 0px -50% 0px'});
+document.querySelectorAll('main section[id]').forEach(s=>io.observe(s));
+
+const up = document.getElementById('up');
+addEventListener('scroll',()=>up.classList.toggle('show', scrollY > 600));
+up.addEventListener('click',()=>scrollTo({top:0}));
+</script>
+</body>
+</html>
